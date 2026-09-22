@@ -3,6 +3,9 @@ const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
 const contentTypeSelect = document.getElementById('contentType');
 const resultsContainer = document.getElementById('resultsContainer');
+const TMDB_API_KEY = 'e3ddb32a1b6baf0585362ece104c17bd';
+const RAWG_API_KEY = '2d09364631804da480e6ebc795aa1af6';
+
 
 searchButton.addEventListener('click', executeSearch);
 searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') executeSearch(); });
@@ -21,11 +24,10 @@ function executeSearch() {
 async function fetchMoviesFromAPI(query) {
     try {
         const targetUrl = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=es-ES&query=${encodeURIComponent(query)}`;
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
         
-        const response = await fetch(proxyUrl);
-        const dataWrapper = await response.json();
-        const data = JSON.parse(dataWrapper.contents);
+        // Hacemos el fetch directo a TMDB
+        const response = await fetch(targetUrl);
+        const data = await response.json();
         
         if (data.results && data.results.length > 0) {
             displayResults(data.results, 'movie');
@@ -38,15 +40,14 @@ async function fetchMoviesFromAPI(query) {
     }
 }
 
-// Consulta real a RAWG usando el proxy alternativo
+// Consulta real a RAWG (Directa, sin proxy)
 async function fetchGamesFromAPI(query) {
     try {
         const targetUrl = `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&search=${encodeURIComponent(query)}`;
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
         
-        const response = await fetch(proxyUrl);
-        const dataWrapper = await response.json();
-        const data = JSON.parse(dataWrapper.contents);
+        // Hacemos el fetch directo a RAWG
+        const response = await fetch(targetUrl);
+        const data = await response.json();
         
         if (data.results && data.results.length > 0) {
             displayResults(data.results, 'game');
@@ -78,7 +79,7 @@ function displayResults(items, type) {
             </div>
             <div class="card-content">
                 <h3>${title}</h3>
-                <button class="btn-review" onclick="openReviewModal('${title.replace(/'/g, "\\'")}')">Escribir Crítica</button>
+                <button class="btn-review" onclick="openReviewModal('${title.replace(/'/g, "\\'")}')">Escribir Crítica</button>55
             </div>
         `;
         resultsContainer.appendChild(card);
