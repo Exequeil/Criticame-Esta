@@ -16,6 +16,7 @@
         </div>
         <div class="nav-controls" id="navControls">
             <button onclick="switchView('viewCatalog')" class="nav-btn active" id="btnCatalog">Catálogo</button>
+            <button onclick="switchView('viewHallOfFame')" class="nav-btn" id="btnHallOfFame">Sala de la Fama</button>
             <button onclick="switchView('viewLogin')" class="nav-btn" id="btnLoginNav">Iniciar Sesión</button>
             <button onclick="switchView('viewRegister')" class="nav-btn" id="btnRegisterNav">Registrarse</button>
         </div>
@@ -103,8 +104,26 @@
                 <p class="auth-redirect">¿Ya tienes cuenta? <a href="#" onclick="switchView('viewLogin')">Inicia sesión aquí</a></p>
                 <div id="regStatus" class="db-status"></div>
             </div>
+            
         </section>
 
+        <!-- VISTA 4: Detalle de la Obra y Listado de Críticas -->
+        <section id="viewDetail" class="view-section">
+            <button class="nav-btn" onclick="switchView('viewCatalog')" style="margin-bottom: 1.5rem;"><i class="fa-solid fa-arrow-left"></i> Volver al Catálogo</button>
+            <div id="detailContent" class="detail-container">
+                <!-- Se inyecta dinámicamente con JS -->
+            </div>
+        </section>
+<!-- VISTA 5: Sala de la Fama -->
+        <section id="viewHallOfFame" class="view-section">
+            <div class="auth-card" style="max-width: 700px; text-align: center;">
+                <h2>🏆 Sala de la Fama 🏆</h2>
+                <p>El crítico más aclamado y votado por toda la comunidad</p>
+                <div id="hallOfFameContent">
+                    <!-- Se carga dinámicamente con JS -->
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Modal para Escribir Crítica y Puntuar (0 a 5 estrellas)[cite: 2] -->
