@@ -9,50 +9,149 @@
 </head>
 <body>
 
-    <!-- Barra de Navegación -->
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
     <header class="navbar">
         <div class="logo" onclick="switchView('viewCatalog')" style="cursor: pointer;">
-            <h1>Critícame <span>Ésta</span> </h1>
+            <h1>Critícame <span>Ésta</span></h1>
         </div>
+        
+        <!-- BUSCADOR GLOBAL -->
+        <div class="search-bar-container">
+            <select id="contentType">
+                <option value="movie">Películas (TMDB)</option>
+                <option value="game">Videojuegos (RAWG)</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Buscar película o videojuego...">
+            <button id="searchButton"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+        </div>
+
         <div class="nav-controls" id="navControls">
-            <button onclick="switchView('viewCatalog')" class="nav-btn active" id="btnCatalog">Catálogo</button>
-            <button onclick="switchView('viewHallOfFame')" class="nav-btn" id="btnHallOfFame">Sala de la Fama</button>
-            <button onclick="switchView('viewLogin')" class="nav-btn" id="btnLoginNav">Iniciar Sesión</button>
-            <button onclick="switchView('viewRegister')" class="nav-btn" id="btnRegisterNav">Registrarse</button>
+            <button onclick="switchView('viewCatalog')" class="nav-btn active" id="btnCatalog"><i class="fa-solid fa-house"></i> Inicio</button>
+            <button onclick="switchView('viewHallOfFame')" class="nav-btn" id="btnHallOfFame"><i class="fa-solid fa-trophy"></i> Sala de la Fama</button>
+            <button onclick="switchView('viewLogin')" class="nav-btn" id="btnLoginNav"><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</button>
+            <button onclick="switchView('viewRegister')" class="nav-btn" id="btnRegisterNav"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
         </div>
     </header>
 
-    <!-- Contenedor Principal de Vistas -->
+    <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
     <main class="main-container">
         
-        <!-- VISTA 1: Catálogo y Buscador de APIs -->
+        <!-- VISTA 1: MENÚ PRINCIPAL / PORTADA (INICIO) -->
         <section id="viewCatalog" class="view-section active">
-            <div class="search-container-bar">
-                <select id="contentType">
-                    <option value="movie">Películas (TMDB)</option>
-                    <option value="game">Videojuegos (RAWG)</option>
-                </select>
-                <input type="text" id="searchInput" placeholder="Busca un título para criticar...">
-                <button id="searchButton"><i class="fa-solid fa-search"></i> Buscar</button>
+            <div class="imdb-hero-container">
+                <div class="hero-main-banner">
+                    <div class="hero-poster-overlay">
+                        <img src="https://image.tmdb.org/t/p/w500/5buio6jW0pGOz1mfx943kM39b3k.jpg" alt="Dune: Parte Dos">
+                        <div class="hero-details">
+                            <span class="hero-badge"><i class="fa-solid fa-star"></i> Destacado de la Semana</span>
+                            <h2>Dune: Parte Dos</h2>
+                            <p>Paul Atreides se une a Chani y a los Fremen mientras busca venganza contra los conspiradores que destruyeron a su familia.</p>
+                            <button class="btn-submit" style="width: auto; padding: 0.7rem 1.5rem;" onclick="openReviewModal('Dune: Parte Dos')">
+                                <i class="fa-solid fa-pen-to-square"></i> Dejar Crítica
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-sidebar">
+                    <h3><i class="fa-solid fa-fire" style="color: var(--brand-red);"></i> En Tendencia</h3>
+                    <div class="sidebar-item" onclick="openReviewModal('The Batman')">
+                        <i class="fa-solid fa-film"></i>
+                        <div>
+                            <h4>The Batman</h4>
+                            <small>⭐ 8.1 / 10 - Ver detalles</small>
+                        </div>
+                    </div>
+                    <div class="sidebar-item" onclick="openReviewModal('Elden Ring')">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <div>
+                            <h4>Elden Ring</h4>
+                            <small>⭐ 9.5 / 10 - Videojuego del Año</small>
+                        </div>
+                    </div>
+                    <div class="sidebar-item" onclick="openReviewModal('Chainsaw Man')">
+                        <i class="fa-solid fa-tv"></i>
+                        <div>
+                            <h4>Chainsaw Man</h4>
+                            <small>⭐ 8.6 / 10 - Serie popular</small>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="hero">
-                <h2>El pulso de la comunidad sobre cine y videojuegos</h2>
-                <p>Lee, analiza y puntúa de 0 a 5 estrellas tus obras favoritas.</p>
+            <div class="info-guide-section">
+                <h2 class="section-title"><i class="fa-solid fa-circle-info"></i> ¿Qué podés hacer en Critícame Ésta?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-magnifying-glass feature-icon"></i>
+                        <h3>1. Buscador Avanzado</h3>
+                        <p>Utilizá la barra superior para consultar al instante las bases de datos de <strong>TMDB</strong> y <strong>RAWG</strong> en su propia sección de resultados.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-star-half-stroke feature-icon"></i>
+                        <h3>2. Reseñas (Escala 0-10)</h3>
+                        <p>Puntuá de 0 a 10 puntos y redactá tus críticas personales para calcular el promedio real de toda la comunidad.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-comments feature-icon"></i>
+                        <h3>3. Debate e Interacción</h3>
+                        <p>Dale Me Gusta o No Me Gusta a las opiniones de otros usuarios y dejales comentarios para armar debate sobre tus obras favoritas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-crown feature-icon"></i>
+                        <h3>4. Sala de la Fama</h3>
+                        <p>Los críticos con más votos positivos acumulados en sus reseñas se coronan en la cima del podio de la comunidad.</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
+        <!-- VISTA DE BÚSQUEDA -->
+        <section id="viewSearch" class="view-section">
+            <h2 class="section-title" id="resultsTitle"><i class="fa-solid fa-magnifying-glass"></i> Resultados de Búsqueda</h2>
             <section id="resultsContainer" class="grid-container">
                 <div class="welcome-message">
-                    <p>Usa el buscador superior para encontrar contenido y dejar tu crítica registrada en el sistema.</p>
+                    <p>Realiza una búsqueda desde la barra superior para ver los resultados aquí.</p>
                 </div>
             </section>
         </section>
 
-        <!-- VISTA 2: Login / Ingreso al Sistema (Proceso 1 del DFD) -->
+        <!-- VISTA DE PERFIL Y MENÚ DE USUARIO -->
+        <section id="viewProfile" class="view-section">
+            <div class="detail-container" style="max-width: 900px; margin: 0 auto;">
+                <div class="profile-header" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; flex-wrap: wrap;">
+                    <div id="profileAvatarContainer" style="position: relative; width: 90px; height: 90px; border-radius: 50%; overflow: hidden; background: #20222c; border: 2px solid var(--accent-color); display: flex; align-items: center; justify-content: center;">
+                        <img id="profileAvatarImg" src="" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                        <i id="profileAvatarIcon" class="fa-solid fa-user" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <h2 id="profileUsername" style="font-size: 1.8rem; color: var(--accent-color);">@Usuario</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.8rem;">Panel de control y gestión de actividad personal</p>
+                        
+                        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                            <input type="file" id="avatarFileInput" accept="image/*" style="font-size: 0.8rem; color: var(--text-muted);">
+                            <button onclick="saveProfileAvatar()" class="btn-submit" style="width: auto; padding: 0.4rem 1rem; font-size: 0.8rem; margin: 0;">Guardar Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 style="color: var(--brand-red); margin-bottom: 1rem;"><i class="fa-solid fa-pen-nib"></i> Mis Críticas Publicadas</h3>
+                    <div id="userReviewsContainer"></div>
+                </div>
+
+                <div class="profile-section" style="margin-top: 2rem;">
+                    <h3 style="color: var(--brand-red); margin-bottom: 1rem;"><i class="fa-solid fa-comments"></i> Mis Comentarios Realizados</h3>
+                    <div id="userCommentsContainer"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA 2: LOGIN -->
         <section id="viewLogin" class="view-section">
             <div class="auth-card">
                 <h2>Iniciar Sesión</h2>
-                <p>Acceso al sistema (Proceso 1)</p>
+                <p>Ingresá con tus credenciales de usuario registrado</p>
                 <form id="loginForm">
                     <div class="form-group">
                         <label>Usuario (8 caracteres alfabéticos)[cite: 1]:</label>
@@ -62,21 +161,21 @@
                         <label>Contraseña (6 alfabéticos, 2 numéricos, 1 especial)[cite: 1]:</label>
                         <input type="password" id="loginPass" required placeholder="Ej: claveab1*">
                     </div>
-                    <button type="submit" class="btn-submit">Ingresar</button>
+                    <button type="submit" class="btn-submit">Ingresar al Sistema</button>
                 </form>
-                <p class="auth-redirect">¿No tienes una cuenta? <a href="#" onclick="switchView('viewRegister')">Regístrate aquí</a></p>
+                <p class="auth-redirect">¿No tenés una cuenta todavía? <a href="#" onclick="switchView('viewRegister')">Registrate acá</a></p>
                 <div id="loginStatus" class="db-status"></div>
             </div>
         </section>
 
-        <!-- VISTA 3: Registro de Usuario (Proceso 2 / Almacén D1) -->
+        <!-- VISTA 3: REGISTRO -->
         <section id="viewRegister" class="view-section">
             <div class="auth-card">
                 <h2>Registro de Nuevo Usuario</h2>
-                <p>Gestor de Usuarios - Base de Datos D1[cite: 2]</p>
+                <p>Gestor de Usuarios - Base de Datos Local</p>
                 <form id="registerForm">
                     <div class="form-group">
-                        <label>Usuario (Exactamente 8 caracteres alfabéticos)[cite: 1]:</label>
+                        <label>Usuario (8 caracteres alfabéticos)[cite: 1]:</label>
                         <input type="text" id="regUser" maxlength="8" required placeholder="Ej: ezeperez">
                     </div>
                     <div class="form-group">
@@ -84,83 +183,83 @@
                         <input type="password" id="regPass" required placeholder="Ej: claveab1*">
                     </div>
                     <div class="form-group">
-                        <label>Nombre (Entre 3 y 15 caracteres alfabéticos)[cite: 1]:</label>
+                        <label>Nombre (3 a 15 caracteres)[cite: 1]:</label>
                         <input type="text" id="regName" required placeholder="Ezequiel">
                     </div>
                     <div class="form-group">
-                        <label>Apellido (Entre 3 y 15 caracteres alfabéticos)[cite: 1]:</label>
+                        <label>Apellido (3 a 15 caracteres)[cite: 1]:</label>
                         <input type="text" id="regLastName" required placeholder="Sacchi">
                     </div>
                     <div class="form-group">
-                        <label>Número Celular (10 caracteres numéricos)[cite: 1]:</label>
+                        <label>Número Celular (10 numéricos)[cite: 1]:</label>
                         <input type="text" id="regPhone" maxlength="10" required placeholder="1122334455">
                     </div>
                     <div class="form-group">
-                        <label>Email (10 a 25 alfanuméricos, formato correo)[cite: 1]:</label>
+                        <label>Email (Formato válido)[cite: 1]:</label>
                         <input type="email" id="regEmail" required placeholder="correo@servidor.com">
                     </div>
-                    <button type="submit" class="btn-submit">Registrarse</button>
+                    <button type="submit" class="btn-submit">Crear Cuenta</button>
                 </form>
-                <p class="auth-redirect">¿Ya tienes cuenta? <a href="#" onclick="switchView('viewLogin')">Inicia sesión aquí</a></p>
+                <p class="auth-redirect">¿Ya tenés cuenta? <a href="#" onclick="switchView('viewLogin')">Iniciá sesión acá</a></p>
                 <div id="regStatus" class="db-status"></div>
             </div>
-            
         </section>
 
-        <!-- VISTA 4: Detalle de la Obra y Listado de Críticas -->
+        <!-- VISTA 4: DETALLE DE OBRA Y CRÍTICAS -->
         <section id="viewDetail" class="view-section">
-            <button class="nav-btn" onclick="switchView('viewCatalog')" style="margin-bottom: 1.5rem;"><i class="fa-solid fa-arrow-left"></i> Volver al Catálogo</button>
-            <div id="detailContent" class="detail-container">
-                <!-- Se inyecta dinámicamente con JS -->
-            </div>
+            <button class="nav-btn" onclick="switchView('viewSearch')" style="margin-bottom: 1.5rem;"><i class="fa-solid fa-arrow-left"></i> Volver a Resultados</button>
+            <div id="detailContent" class="detail-container"></div>
         </section>
-<!-- VISTA 5: Sala de la Fama -->
+
+        <!-- VISTA 5: SALA DE LA FAMA -->
         <section id="viewHallOfFame" class="view-section">
             <div class="auth-card" style="max-width: 700px; text-align: center;">
                 <h2>🏆 Sala de la Fama 🏆</h2>
-                <p>El crítico más aclamado y votado por toda la comunidad</p>
-                <div id="hallOfFameContent">
-                    <!-- Se carga dinámicamente con JS -->
-                </div>
+                <p>El crítico más aclamado y votado positivamente por toda la comunidad</p>
+                <div id="hallOfFameContent"></div>
             </div>
         </section>
     </main>
 
-    <!-- Modal para Escribir Crítica y Puntuar (0 a 5 estrellas)[cite: 2] -->
+    <!-- MODAL PARA ESCRIBIR CRÍTICA -->
     <div id="reviewModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 id="modalTitle">Escribir Crítica</h2>
-            <p id="modalSubTitle"></p>
+            <p id="modalSubTitle" style="color: var(--accent-color); margin-bottom: 1rem;"></p>
             
             <form id="critiqueForm">
                 <div class="form-group">
                     <label>Usuario Actual:</label>
-                    <input type="text" id="critiqueUserDisplay" readonly style="background: #111; color: var(--accent-color);">
+                    <input type="text" id="critiqueUserDisplay" readonly style="background: #111; color: var(--accent-color); font-weight: bold;">
                 </div>
                 <div class="form-group">
-                    <label>Puntuación (0 a 5 Estrellas)[cite: 2]:</label>
+                    <label>Puntuación (Escala de 0 a 10 Puntos)[cite: 3]:</label>
                     <select id="critiqueStars" required>
-                        <option value="5">⭐⭐⭐⭐⭐ (5 - Obra Maestra)</option>
-                        <option value="4">⭐⭐⭐⭐ (4 - Muy Bueno)</option>
-                        <option value="3">⭐⭐⭐ (3 - Bueno)</option>
-                        <option value="2">⭐⭐ (2 - Regular)</option>
-                        <option value="1">⭐ (1 - Malo)</option>
-                        <option value="0">⭐ (0 - Horrible)</option>
+                        <option value="10">⭐⭐⭐⭐⭐ 10 - Obra Maestra Suprema</option>
+                        <option value="9">⭐⭐⭐⭐½ 9 - Excelente / Imprescindible</option>
+                        <option value="8">⭐⭐⭐⭐ 8 - Muy Buena</option>
+                        <option value="7">⭐⭐⭐½ 7 - Buena / Recomendable</option>
+                        <option value="6">⭐⭐⭐ 6 - Aceptable</option>
+                        <option value="5">⭐⭐½ 5 - Regular / Del montón</option>
+                        <option value="4">⭐⭐ 4 - Mala</option>
+                        <option value="3">⭐½ 3 - Muy Mala</option>
+                        <option value="2">⭐ 2 - Insalvable</option>
+                        <option value="1">½ 1 - Horrible</option>
+                        <option value="0">0 - Desastre Total</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Escribe tu Crítica:</label>
-                    <textarea id="critiqueText" rows="4" required placeholder="Desarrolla tu opinión personal sobre la obra..."></textarea>
+                    <label>Escribí tu reseña o crítica:</label>
+                    <textarea id="critiqueText" rows="4" required placeholder="Desarrollá tu opinión personal sobre la obra..."></textarea>
                 </div>
                 <button type="submit" class="btn-submit">Guardar y Publicar Crítica</button>
             </form>
         </div>
     </div>
 
-    <!-- Pie de Página -->
     <footer>
-        <p>&copy; 2026 E.T N°26 Confederación Suiza - Proyecto Criticame Esta[cite: 1]. Desarrollado por Sacchi y Barraza[cite: 1].</p>
+        <p>&copy; 2026 E.T N°26 Confederación Suiza - Proyecto Criticame Esta[cite: 3]. Desarrollado por Sacchi y Barraza[cite: 3].</p>
     </footer>
 
     <script src="app.js"></script>
